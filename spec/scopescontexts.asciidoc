@@ -326,9 +326,8 @@ A bean is called _passivation capable_ if the container is able to temporarily t
 * A managed bean is passivation capable if and only if the bean class is serializable and all interceptors and decorators of the bean are passivation capable.
 * A producer method is passivation capable if and only if it never returns a value which is not passivation capable at runtime.
 * A producer field is passivation capable if and only if it never refers to a value which is not passivation capable at runtime.
-
-
-A custom implementation of +Bean+ is passivation capable if it implements the interface +PassivationCapable+. An implementation of +Contextual+ that is not a bean is passivation capable if it implements both +PassivationCapable+ and +Serializable+.
+* A custom implementation of +Bean+ is passivation capable if it implements the interface +PassivationCapable+. 
+* An implementation of +Contextual+ that is not a bean is passivation capable if it implements both +PassivationCapable+ and +Serializable+.
 
 [source, java]
 ----
@@ -422,6 +421,9 @@ If
 * a built-in bean
 
 has a decorator or interceptor which is not a passivation capable dependency, the container automatically detects the problem and treats it as a deployment problem.
+
+If a custom implementation of +Bean+ which declares a passivation scope type is not a passivatioon capable bean the container automatically detects the problem and treats it as a deployment problem.
+
 
 [[builtin_contexts]]
 
